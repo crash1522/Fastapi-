@@ -35,6 +35,7 @@ cd fastapi_template_ver1
 `.env.development` 파일을 수정하여 필요한 환경 변수를 설정합니다.
 
 ```
+
 # Supabase 설정 (Supabase 사용 시)
 SUPABASE_URL=https://your-supabase-url.supabase.co
 SUPABASE_KEY=your-supabase-key
@@ -46,7 +47,15 @@ SUPABASE_KEY=your-supabase-key
 docker compose up -d
 ```
 
-4. API 문서 접속
+4. 로컬 실행
+개발환경에서 간단하게 로컬 실행이 필요한 경우에는
+
+```bash
+python run.py
+```
+로 실행할 수 있습니다. 
+
+5. API 문서 접속
 
 브라우저에서 `http://localhost:8000/docs`로 접속하여 API 문서를 확인할 수 있습니다.
 
