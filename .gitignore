@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 가상환경
+venv/
+ENV/
+.env
+
+# 환경 변수 파일 (개발용 제외)
+.env.production
+.env.test
+
+# 데이터베이스
+*.db
+*.sqlite3
+
+# 로그
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# 테스트 커버리지
+.coverage
+htmlcov/
+
+# 캐시
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 정적 파일 및 미디어
+/static/
+/media/
+
+# SSL 인증서
+*.pem
+*.key
+*.crt
+
+# Docker
+.docker/
+
+# Redis
+dump.rdb
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# 기타
+.ipynb_checkpoints
+node_modules/ 

@@ -1,0 +1,90 @@
+### **FastAPI 베스트 프랙티스 및 가이드라인**
+
+---
+
+## **핵심 원칙**
+- 명확하고 기술적인 응답을 작성하며, 정확한 FastAPI 예제를 포함한다.
+- FastAPI의 내장 기능을 최대한 활용하여 효율적인 개발을 진행한다.
+- 가독성과 유지보수성을 우선하며, PEP 8 및 FastAPI 스타일 가이드를 준수한다.
+- 설명적인 변수 및 함수명을 사용하며, `lowercase_with_underscores`와 같은 네이밍 컨벤션을 따른다.
+- 프로젝트를 모듈화하여 관심사 분리(Separation of Concerns)를 유지하며, 재사용성을 극대화한다.
+- 모듈 관리는 Poetry를 사용한다. poetry는 패키지 모드를 비활성화 한다.
+---
+
+## **FastAPI / Python**
+- API 엔드포인트를 정의할 때 **FastAPI의 `APIRouter`를 사용**하여 구조화한다.
+- 데이터베이스 연동 시 SQLAlchemy ORM 또는 Supabase를 우선적으로 활용하며, 성능상 필요할 때만 Raw SQL을 사용한다.
+- FastAPI의 `Depends()`를 활용하여 **의존성 주입(Dependency Injection)**을 적용한다.
+- Pydantic 기반의 요청 및 응답 스키마를 사용하여 데이터 검증을 수행한다.
+- **Repository, Service, Router 패턴을 적용**하여 코드의 모듈화와 유지보수성을 높인다.
+- 미들웨어를 활용하여 인증, 로깅, 요청 처리를 관리한다.
+
+---
+
+## **FastAPI 기반 API 개발**
+- API 엔드포인트는 **FastAPI의 `@router.get`, `@router.post` 데코레이터**를 활용하여 정의한다.
+- **FastAPI의 `Depends()`를 사용하여 인증, 권한, 데이터베이스 세션을 관리한다.**
+- **Pydantic 모델을 활용하여 요청 및 응답을 검증**하며, 입력 데이터 유효성을 검사한다.
+- **I/O 바운드 작업이 많을 경우 `async` 뷰를 활용하여 성능을 개선한다.**
+- 대량의 데이터를 반환할 때는 **페이징 처리(Pagination)**를 적용한다.
+
+---
+
+## **에러 처리 및 데이터 검증**
+- FastAPI의 기본 예외 처리 기능을 활용하여 전역적인 오류를 관리한다.
+- 요청 데이터 검증은 Pydantic을 활용하여 수행하며, 수동 검증을 최소화한다.
+- 비즈니스 로직 및 서비스 계층에서 `try-except` 블록을 활용하여 예외 처리를 수행한다.
+- **FastAPI의 `exception_handler()`를 활용하여 커스텀 예외 처리를 적용한다.**
+- 커스텀 404 및 500 에러 페이지를 제공하여 사용자 경험을 개선한다.
+
+---
+
+## **필수 종속성**
+- FastAPI (고성능 API 프레임워크)
+- SQLAlchemy 또는 Supabase (데이터베이스 ORM 및 API 통합)
+- Celery (백그라운드 작업 처리)
+- Redis (캐싱 및 태스크 큐)
+- Pydantic (요청/응답 검증)
+- Poetry (종속성 관리 및 패키지 관리 도구)
+
+---
+
+## **데이터 베이스**
+- 데이터베이스는 Supabase를 사용한다.
+- 데이터베이스 연동 시 SQLAlchemy ORM 또는 Supabase를 우선적으로 활용하며, 성능상 필요할 때만 Raw SQL을 사용한다.
+
+---
+
+## **비동기 처리**
+- 가벼운 작업은 FastAPI의 BackgroundTasks를 사용한다.
+- 비동기 처리는 Celery를 사용한다.
+
+---
+
+## **FastAPI 개발 시 베스트 프랙티스**
+- API 엔드포인트는 **FastAPI의 `APIRouter`를 사용하여 구조화**한다.
+- 비즈니스 로직은 **Service 계층**에서 구현하고, API 뷰는 요청 처리에 집중하도록 설계한다.
+- **SQLAlchemy의 `selectinload`, `joinedload`**를 활용하여 데이터베이스 쿼리를 최적화한다.
+- **Redis 또는 FastAPI의 BackgroundTasks를 활용하여 캐싱 및 백그라운드 작업을 최적화한다.**
+- FastAPI의 보안 권장 사항(예: CORS 설정, SQL 인젝션 방지, XSS 방어)을 준수한다.
+- **pytest와 FastAPI의 TestClient를 활용하여 단위 테스트 및 통합 테스트를 진행한다.**
+- FastAPI의 `Middleware`를 활용하여 인증, 로깅, 보안을 강화한다.
+
+---
+
+## **성능 최적화**
+- **SQLAlchemy ORM 최적화 (`selectinload`, `joinedload`)**를 사용하여 관련 객체를 효율적으로 조회한다.
+- Redis를 활용하여 자주 조회되는 데이터를 캐싱한다.
+- 데이터베이스 인덱싱 및 쿼리 최적화를 적용하여 성능을 개선한다.
+- Celery를 활용하여 백그라운드 작업을 처리(예: 이메일 전송, 데이터 처리)한다.
+- **Static Files 미들웨어 또는 CDN을 활용하여 정적 파일을 최적화한다.**
+
+---
+
+## **핵심 컨벤션**
+- FastAPI의 "Convention Over Configuration" 원칙을 준수하여 보일러플레이트 코드를 최소화한다.
+- 보안(Security) 및 성능(Performance) 최적화를 모든 개발 과정에서 고려한다.
+- 명확하고 논리적인 프로젝트 구조를 유지하여 가독성과 유지보수성을 높인다.
+- **FastAPI의 의존성 주입(`Depends()`)을 적극 활용하여 API 로직을 모듈화한다.**
+- **API를 `router.include_router()` 기반으로 구성하여 구조화된 API를 만든다.**
+
